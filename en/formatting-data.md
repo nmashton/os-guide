@@ -4,7 +4,7 @@ OpenSpending expects all data to be in a simple format.
 
 OpenSpending accepts data in a single file format, the Comma-Separated Values (CSV) file. A CSV is a plain text file that represents data as a table, which is similar to a spreadsheet. In a table, each data point is represented by a row, and each data point's properties are represented by a column. CSV files encode tables by giving each row a line in the text file and by separating columns with commas.
 
-CSVs accepted by OpenSpending are *denormalized*, meaning that they do not save space by removing redundant values. OpenSpending-ready CSVs are also *rectangular*, having exactly the same number of columns in each row.
+CSVs accepted by OpenSpending do not save space by removing redundant values. If your spreadsheet omits any repeated values, those omitted values must be filled in before OpenSpending can use your data. OpenSpending-ready CSVs are also *rectangular*, meaning that they have exactly the same number of columns in each row.
 
 #### The OpenSpending format
 
@@ -16,13 +16,13 @@ CSVs for OpenSpending must have the following properties.
 
 3. Consistent columns. Each column must consistently represent a single type of value for all rows. (There can be no subheader rows, for example.)
 
-4. Rows are data points. Rows should contain only one type of information: one transaction or one budget line. One row must represent a maximum of one time period. (Rows cannot represent multiple transactions.)
+4. Rows are single data points. Rows should contain *only one* transaction or one budget line. Each row must represent a maximum of one time period.
 
-5. No blank rows or cells. Each row of an imported data file should contain all of the information required to construct the resulting item.
+5. No blank rows or cells. Each row should be completely filled in. Some spreadsheets leave redundant data cells blank or have other ways of saving space, but OpenSpending requires each row to be complete on its own.
 
 6. No pre-aggregated totals (e.g. sub-totals or "roll-ups"). OpenSpending will do the maths and compute these automatically.
 
-7. A unique identifier. There must be a column (or a combination of columns) whose values uniquely identify each row. The easiest way to create such an identifier is to add a dummy column to the dataset in which you put a number that increases for each row. You can do this in Excel by typing the numbers into the first two rows, selecting both cells and dragging down the lower right corner of the cell to extend the series.
+7. Rows have values that uniquely identify them. Each row must have some column (or combination of column) whose value(s) can be used as an "ID" for the row. Each row's ID must be unique. For example, your data could have a column named "ID" which contains a different number for each row. An easy way to create such an ID column in Excel is to add a new column, write "1" in the top cell of the column, write "2" in the second cell from the top, select both cells, and then click and drag the lower right corner of the selection to the bottom of the spreadsheet.
 
 8. Dates in the correct format. Dates must be in the format "yyyy-mm-dd".
 
